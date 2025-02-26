@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --lightDark: #343a40;
+  --darkBlue: #0c121e;
+  --lightBlue: #202c3c;
+  --white: #fff;
+  --customHeight: calc(100vh - 4rem);
+}
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background-color: var(--darkBlue);
+  color: var(--white);
+  overflow: hidden;
+  padding: 1rem;
+}
+
+
+::-webkit-scrollbar {
+  width: 0;
+}
