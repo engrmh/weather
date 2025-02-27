@@ -1,4 +1,3 @@
-import React from "react";
 import SearchBox from "../../modules/searchBox/searchBox";
 import useHomeCtx from "../home/context";
 import MapSystem from "../../modules/map/map";
@@ -12,7 +11,7 @@ export default function Map() {
           getCurrentCityWeather(text);
         }}
       />
-      <div className="bg-lightBlue p-2 rounded-xl mt-5">
+      <div className="bg-lightBlue p-2 rounded-xl mt-5 h-[80vh]">
         {currentCityWeatherData ? (
           <MapSystem
             lat={currentCityWeatherData.location.lat}

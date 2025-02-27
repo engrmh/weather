@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import toast from "react-hot-toast";
 
 const baseURL = "/api/v1/";
 
@@ -28,7 +29,12 @@ useAxios.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      return error.response;
+      if (error.status === 400) {
+        toast.error("City Not Found!!");
+      }
+      console.log(error.status);
+
+      // return error.response;
     }
     return Promise.reject(error);
   }

@@ -12,7 +12,8 @@ export enum WeatherStatus {
   // "Hail" = "/weather/",
   // "Tornado" = "/weather/",
   // "Hurricane" = "/weather/",
-  // "Overcast" = "/weather/", // Complete cloud coverage
+  "Overcast" = "/weather/forecast.png", // Complete cloud coverage
+  "Mist" = "/weather/forecast.png",
   // "Drizzle" = "/weather/",
   // "FreezingRain" = "/weather/",
   // "Dust" = "/weather/",
@@ -21,6 +22,10 @@ export enum WeatherStatus {
   // "Haze" = "/weather/",
   "Patchy rain nearby" = "/weather/sun-rain.png",
   "Moderate rain" = "/weather/rain2.png",
+  "Light rain" = "/weather/rain3.png",
+  "Light freezing rain" = "/weather/snow-rain.png",
+  "Clear" = "/weather/sun-cloud.png",
+  // "" = "/weather/",
 }
 
 // Convert the enum to an array

@@ -1,23 +1,53 @@
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-// import "leaflet/dist/leaflet.css";
+import { useEffect } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
-export default function MapSystem({ lat, lng }: { lat: number; lng: number }) {
-  window.addEventListener("DOMContentLoaded", () => {});
+// Fix for missing marker icons in Leaflet
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+});
+
+interface MapSystemProps {
+  lat: number;
+  lng: number;
+}
+
+function UpdateMapCenter({ lat, lng }: { lat: number; lng: number }) {
+  const map = useMap(); // Get the map instance
+  useEffect(() => {
+    map.setView([lat, lng], map.getZoom(), {
+      animate: true, // Add smooth transition when map center changes
+    });
+  }, [lat, lng, map]);
+
+  return null; // This component does not render anything
+}
+
+export default function MapSystem({ lat, lng }: MapSystemProps) {
   return (
-    <div className="overflow-hidden flex">
+    <div className="h-full w-full">
       <MapContainer
-        style={{ height: "100%", width: "100%" }}
         center={[lat, lng]}
         zoom={13}
-        // scrollWheelZoom={false}
-        // boxZoom={false}
+        scrollWheelZoom={false}
+        style={{ height: "100%", width: "100%" }}
       >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
         <Marker position={[lat, lng]}>
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            Latitude: {lat}, Longitude: {lng}
           </Popup>
         </Marker>
+        {/* Update map center on lat/lng change */}
+        <UpdateMapCenter lat={lat} lng={lng} />
       </MapContainer>
     </div>
   );
